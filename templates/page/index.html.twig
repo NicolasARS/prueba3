@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block body %}
+
+<h1>Almacenes</h1>
+	<h2>Bienvenido a la web de almacenes.</h2>
+	<p>Página de inicio</p>
+    {% if app.user %}
+            <button><a href="{{ path('secciones') }}"><i class="fa fa-sign-out sr-icons"></i>secciones</a></button>
+            <button><a href="{{ path('alta') }}"><i class="fa fa-sign-out sr-icons"></i>Alta nuevo empleado</a></button>
+            <button><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out sr-icons"></i> {{ app.user.name }} - Logout</a></button>
+    {% else %}
+            <button class="{{ (app.request.attributes.get('_route') == 'app_login')  ? 'active': ''}} lien"><a href="{{ path('app_login') }}"><i class="fa fa-sign-in sr-icons"></i> Login</a></button>
+            <button class="{{ (app.request.attributes.get('_route') == 'app_register')  ? 'active': ''}} "><a href="{{ path('app_register') }}"><i class="fa fa-user-secret sr-icons"></i> Register</a></button>
+    {% endif %}
+    <hr>
+
+    <h2>Lista Empleados:</h2>
+    {% if empleados %}
+    {% for empleado in empleados %}
+    <ul>
+        <li><strong>Empleado #</strong><a href="empleados/ficha-empleado/{{empleado.id}}">{{ empleado.id}}</a></li>
+        <li><strong>Nombre: </strong>{{ empleado.nombre}}</li>
+        <li><strong>Apellidos: </strong>{{ empleado.apellido}}</li>
+        <li><strong>Avatar: </strong><br>
+        <img src={{ asset('/images/empleados/' ~ empleado.foto) }}/></li>
+        <li><strong>Seccion: </strong>{{ empleado.seccion.nombre}}</li>
+    </ul>
+    <button><a href="empleado/eliminar/{{empleado.id}}">Eliminar empleado</a></button>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p>Aun no hay empleados disponibles.</p>
+    {% endif %}
+{% endblock %}

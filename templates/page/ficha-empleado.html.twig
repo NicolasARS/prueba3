@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ficha Empleado{% endblock %}
+{% block body %}
+<h1>Ficha del empleado</h1>
+    {% if empleado %}
+    <ul>
+        <li><strong>Empleado #{{ empleado.id}}</strong></li>
+        <li><strong>Nombre: </strong>{{ empleado.nombre}}</li>
+        <li><strong>Apellidos: </strong>{{ empleado.apellido}}</li>
+        <li><strong>Avatar: </strong><br>
+        <img src={{ asset('/images/empleados/' ~ empleado.foto) }}/></li>
+        <li><strong>Seccion: </strong>{{ empleado.seccion.nombre}}</li>
+    </ul>
+    {% else %}
+        <p>Empleado no encontrado</p>
+    {% endif %}
+{% endblock %}

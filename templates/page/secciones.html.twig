@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Secciones{% endblock %}
+
+{% block body %}
+
+<h1>Zona Secciones</h1>
+	<h2>Agregar nueva seccion:<h2>
+	{{ form(form, {'attr': {'class':'form-horizontal'}}) }}
+
+    <hr>
+    <h2>Lista secciones:</h2>
+    {% if secciones %}
+    {% for seccion in secciones %}
+    <ul>
+        <li><strong>Empleado #{{ empleado.id}}</strong></li>
+        <li><strong>Nombre: </strong>{{ empleado.nombre}}</li>
+        <li><strong>Apellidos: </strong>{{ empleado.apellido}}</li>
+        <li><strong>Avatar: </strong><br>
+        <img src={{ asset('/images/empleados/' ~ empleado.foto) }}/></li>
+        <li><strong>Seccion: </strong>{{ empleado.seccion.nombre}}</li>
+    </ul>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p>Aun no hay secciones creadas.</p>
+    {% endif %}
+    
+
+{% endblock %}
